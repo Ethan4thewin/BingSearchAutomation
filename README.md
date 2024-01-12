@@ -28,7 +28,7 @@ The project utilizes the Selenium library to automate Bing searches for a list o
 ### Prerequisites
 
 - Python installed on your machine.
-- Required Python packages: `selenium`, `requests`.
+- Required Python packages: `selenium` for web automation, `requests` for HTTP requests.
 
 ### Installation
 
@@ -37,10 +37,19 @@ The project utilizes the Selenium library to automate Bing searches for a list o
    ```bash
    git clone https://github.com/Ethan4thewin/BingSearchAutomation.git
    ```
-2. Install dependencies:
+2. Download Edge WebDriver and Firefox WebDriver:
+
+   Download Edge web driver from https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver. Most of the time, the stable channel is the right choice.
+   
+   We may also want Firefox web driver Geckodriver for mobile browsing emulating. Link for downloading Mozilla Firefox geckodriver is — https://github.com/mozilla/geckodriver/releases; choose the appropriate one for per your computer architecture.
+   
+   In any case, put the file into the repository location.
+
+4. Install dependencies:
 
    ```bash
-   pip install -r requirements.txt
+   pip install selenium
+   pip install requests
    ```
 
 ### Usage
@@ -50,7 +59,7 @@ Execute the search script:
 python search.py
 ```
 
-### Contributing
+### Contributing & Troubleshooting
 Contributions are welcome! Feel free to open issues or pull requests.
 
 ### License

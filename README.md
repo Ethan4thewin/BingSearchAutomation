@@ -53,12 +53,17 @@ The project utilizes the Selenium library to automate Bing searches for a list o
    ```
 
 ### Usage
-Execute the search script:
+
+Execute the desktop search script:
 
 ```bash
-python search.py
+python search_pc.py
 ```
+Execute the mobile search script:
 
+```bash
+python search_mobile.py
+```
 ### Contributing & Troubleshooting
 Contributions are welcome! Feel free to open issues or pull requests.
 

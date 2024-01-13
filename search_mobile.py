@@ -32,8 +32,8 @@ wait_for(3)
 driver.get("https://rewards.bing.com")
 wait_for(5)
 
-email = "killthemallpro@gmail.com"
-passwd = "Killthemall2712"
+email = "<your email here>"
+passwd = "<your password here>"
 try:
     login_box = driver.find_element(By.ID, "i0116")
     login_box.send_keys(email)

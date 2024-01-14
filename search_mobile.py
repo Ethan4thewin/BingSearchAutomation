@@ -1,11 +1,11 @@
 import json
-import random
 import time
+import logging
+
 import requests
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.options import Options
 
 # A function to wait for a few seconds, preventing too many requests
 def wait_for(sec=2):
@@ -14,41 +14,32 @@ def wait_for(sec=2):
 # Mobile search
 
 # Get a list of 20 words from randomlists.com
-randomlists_url = "https://www.randomlists.com/data/words.json"
+randomlists_url = "https://random-word-api.herokuapp.com/word?number=20"
 response = requests.get(randomlists_url)
-words_list = random.sample(json.loads(response.text)['data'], 20)
+words_list = json.loads(response.text)
 print('{0} words selected from {1}'.format(len(words_list), randomlists_url))
 
-# Create a Firefox profile with a mobile user agent
-profile = webdriver.FirefoxProfile()
-profile.set_preference("general.useragent.override", "Mozilla/5.0 (Android 6.0.1; Mobile; rv:63.0) Gecko/63.0 Firefox/63.0")
+# Define mobile emulation options
+mobile_emulation = {
+    "deviceMetrics": {"width": 360, "height": 640, "pixelRatio": 3.0},
+    "userAgent": "Mozilla/5.0 (Android 6.0.1; Mobile; rv:63.0) Gecko/63.0 Firefox/63.0"
+}
 
-options = Options()
-options.profile = profile
+# Set up Microsoft Edge options with mobile emulation
+edge_options = webdriver.EdgeOptions()
+edge_options.add_experimental_option("mobileEmulation", mobile_emulation)
 
-driver = webdriver.Firefox(options=options)
-driver.set_window_size(360,640)
-wait_for(3)
+# Create Edge WebDriver instance with options
+driver = webdriver.Edge(options=edge_options)
+
+# Set window size (optional)
+driver.set_window_size(360, 640)
+
+# Navigate to a website
 driver.get("https://rewards.bing.com")
-wait_for(5)
+wait_for(10)
 
-email = "<your email here>"
-passwd = "<your password here>"
-try:
-    login_box = driver.find_element(By.ID, "i0116")
-    login_box.send_keys(email)
-    login_box.send_keys(Keys.ENTER)
-    wait_for(3)
-    pass_box = driver.find_element(By.ID, "i0118")
-    pass_box.send_keys(passwd)
-    pass_box.send_keys(Keys.ENTER)
-    wait_for(3)
-    stay_signed = driver.find_element(By.ID, "idBtn_Back")
-    stay_signed.click()
-except Exception as e1:
-    print(e1)
-
-wait_for(30)
+# Perform mobile search actions
 for num, word in enumerate(words_list):
     print('{0}. Searching for: {1}'.format(str(num + 1), word))
     try:
@@ -59,8 +50,8 @@ for num, word in enumerate(words_list):
         search_box.send_keys(word)
         search_box.send_keys(Keys.ENTER)
     except Exception as e1:
-        print(e1)
+        logging.error('An error occurred: %s', e1)
     wait_for(7.5)
 
-driver.close()
-
+# Close the browser
+driver.quit()

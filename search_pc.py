@@ -37,3 +37,4 @@ for num, word in enumerate(words_list):
     wait_for(7.5)
 
 driver.close()
+print("Done!")

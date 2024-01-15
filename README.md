@@ -41,9 +41,9 @@ The project utilizes the Selenium library to automate Bing searches for a list o
 
    Download Edge web driver from https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver. Most of the time, the stable channel is the right choice.
    
-   We may also want Firefox web driver Geckodriver for mobile browsing emulating. Link for downloading Mozilla Firefox geckodriver is https://github.com/mozilla/geckodriver/releases; choose the appropriate one for your computer architecture.
+   We may also want Firefox web driver Geckodriver for mobile browsing emulating (currently it is Edge for this). Link for downloading Mozilla Firefox geckodriver is https://github.com/mozilla/geckodriver/releases; choose the appropriate one for your computer architecture.
    
-   In any case, put the file into the repository location.
+   In any case, find the one that works best for you and put the file into the repository location.
 
 4. Install dependencies:
 

@@ -1,6 +1,7 @@
 import json
 import time
 import logging
+import random
 
 import requests
 from selenium import webdriver
@@ -41,7 +42,8 @@ wait_for(10)
 
 # Perform mobile search actions
 for num, word in enumerate(words_list):
-    print('{0}. Searching for: {1}'.format(str(num + 1), word))
+    wait = random.randint(10, 30)
+    print('{0}. Searching for: {1}, {2} secs'.format(str(num + 1), word, str(wait)))
     try:
         driver.get("http://www.bing.com/")
         wait_for(3)
@@ -51,7 +53,8 @@ for num, word in enumerate(words_list):
         search_box.send_keys(Keys.ENTER)
     except Exception as e1:
         logging.error('An error occurred: %s', e1)
-    wait_for(7.5)
+    wait_for(wait)
 
 # Close the browser
 driver.quit()
+print("Done!")

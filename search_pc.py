@@ -21,10 +21,11 @@ print('{0} words selected from {1}'.format(len(words_list), randomlists_url))
 driver = webdriver.Edge()
 wait_for()
 driver.get("https://rewards.bing.com")
-wait_for(10)
+wait_for(30)
 
 for num, word in enumerate(words_list):
-    print('{0}. Searching for: {1}'.format(str(num + 1), word))
+    wait = random.randint(10, 30)
+    print('{0}. Searching for: {1}, {2} secs'.format(str(num + 1), word, str(wait)))
     try:
         driver.get("http://www.bing.com/")
         wait_for(3)
@@ -34,7 +35,7 @@ for num, word in enumerate(words_list):
         search_box.send_keys(Keys.ENTER)
     except Exception as e1:
         print(e1)
-    wait_for(7.5)
+    wait_for(wait)
 
 driver.close()
 print("Done!")

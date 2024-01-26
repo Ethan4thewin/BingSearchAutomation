@@ -12,7 +12,8 @@ def wait_for(sec=2):
 
 # PC search
 
-# Get a list of 30 words from randomlists.com
+# REMEMBER TO CHECK FOR NUMBER OF WORDS
+# Get a list of words from randomlists.com
 randomlists_url = "https://random-word-api.herokuapp.com/word?number=30"
 response = requests.get(randomlists_url)
 words_list = json.loads(response.text)
